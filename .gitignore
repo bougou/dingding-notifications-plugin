@@ -140,7 +140,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 ### Maven template
-target/
+target/*
+!target/dingding-notifications.hpi
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

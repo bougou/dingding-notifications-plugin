@@ -21,6 +21,9 @@ import org.kohsuke.stapler.QueryParameter;
 import ren.wizard.dingtalkclient.DingTalkClient;
 import ren.wizard.dingtalkclient.message.DingMessage;
 import ren.wizard.dingtalkclient.message.LinkMessage;
+import ren.wizard.dingtalkclient.message.MarkdownMessage;
+import ren.wizard.dingtalkclient.message.TextMessage;
+
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -94,11 +97,16 @@ public class DingTalkNotifier extends Notifier implements SimpleBuildStep {
     public void perform(@Nonnull Run<?, ?> run, @Nonnull FilePath filePath, @Nonnull Launcher launcher, @Nonnull TaskListener taskListener) throws InterruptedException, IOException {
         String buildInfo = run.getFullDisplayName();
         if (!StringUtils.isBlank(message)) {
-            sendMessage(LinkMessage.builder()
-                    .title(buildInfo + message)
-                    .picUrl(imageUrl)
-                    .text(message)
-                    .messageUrl((jenkinsUrl.endsWith("/") ? jenkinsUrl : jenkinsUrl + "/") + run.getUrl())
+            // sendMessage(LinkMessage.builder()
+            //         .title(buildInfo + message)
+            //         .picUrl(imageUrl)
+            //         .text(message)
+            //         .messageUrl((jenkinsUrl.endsWith("/") ? jenkinsUrl : jenkinsUrl + "/") + run.getUrl())
+            //         .build());
+
+            sendMessage(MarkdownMessage.builder()
+                    .title(buildInfo)
+                    .item(message)
                     .build());
         }
     }
